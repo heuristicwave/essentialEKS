@@ -1,0 +1,16 @@
+image:
+  repository: k8s.gcr.io/autoscaling/cluster-autoscaler
+  tag: v1.22.0
+
+awsRegion: ${AWS_REGION}
+autoDiscovery:
+  clusterName: ${CLUSTER_NAME}
+  enabled: true
+
+rbac:
+  create: true
+  serviceAccountAnnotations:
+    eks.amazonaws.com/role-arn: ${SERVICE_ACCOUNT}
+
+nodeSelector:
+  node.kubernetes.io/lifecycle: manage
