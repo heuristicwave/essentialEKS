@@ -25,7 +25,11 @@ resource "aws_subnet" "eks_subnet" {
 
   tags = tomap({
     "Name"                                      = "terraform-eks-node",
-    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared",
+    # For private subnets used by internal LB
+    "kubernetes.io/role/internal-elb" = 1,
+    # For public subnets used by external LB
+    "kubernetes.io/role/elb" = 1
   })
 }
 
