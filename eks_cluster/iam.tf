@@ -8,7 +8,7 @@ resource "aws_iam_openid_connect_provider" "eks_cluster" {
   url             = aws_eks_cluster.eks_cluster.identity[0].oidc[0].issuer
 }
 
-# Create IAM Service Account for CA & AWS LB
+# Create IAM Service Account for CA
 data "aws_iam_policy_document" "eks_assume_role_policy" {
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]
@@ -17,8 +17,7 @@ data "aws_iam_policy_document" "eks_assume_role_policy" {
     condition {
       test     = "StringEquals"
       variable = "${replace(aws_iam_openid_connect_provider.eks_cluster.url, "https://", "")}:sub"
-      values = ["system:serviceaccount:kube-system:cluster-autoscaler",
-      "system:serviceaccount:kube-system:aws-load-balancer-controller"]
+      values   = ["system:serviceaccount:kube-system:cluster-autoscaler"]
     }
 
     principals {
