@@ -1,0 +1,11 @@
+nodeSelector:
+  node.kubernetes.io/lifecycle: spot
+tolerations:
+  - key: "type"
+    operator: "Equal"
+    value: "spot"
+    effect: "NoSchedule"
+resources:
+  requests:
+    cpu: 100m
+    memory: 64Mi

@@ -10,6 +10,32 @@ provider "helm" {
   }
 }
 
+# resource "helm_release" "aws-load-balancer-controller" {
+#   # This config works like `helm repo add [repo-name] [url]` command
+#   repository = "https://aws.github.io/eks-charts"
+#   name       = "aws-load-balancer-controller"
+#   chart      = "aws-load-balancer-controller"
+#   namespace  = "kube-system"
+
+#   values = [
+#     templatefile("./helm-values/aws-load-balancer-controller.yaml", {
+#       AWS_REGION      = var.aws_region,
+#       CLUSTER_NAME    = data.terraform_remote_state.eks.outputs.cluster_name,
+#       SERVICE_ACCOUNT = data.terraform_remote_state.eks.outputs.service_account
+#     })
+#   ]
+# }
+
+resource "helm_release" "aws-node-termination-handler" {
+  repository = "https://aws.github.io/eks-charts"
+  name       = "eks"
+  chart      = "aws-node-termination-handler"
+  namespace  = "kube-system"
+  values = [
+    templatefile("./helm-values/node-termination-handler.yaml", {})
+  ]
+}
+
 // Something problem with installing CA using helm-chart
 # resource "helm_release" "cluster-autoscaler" {
 #   # This config works like `helm repo add [repo-name] [url]` command
