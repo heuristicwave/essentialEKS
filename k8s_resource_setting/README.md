@@ -2,15 +2,6 @@
 
 참고 Reference : [Deploy Applications with the Helm Provider](https://learn.hashicorp.com/tutorials/terraform/helm-provider)
 
-## To-Do
-
-- [x] AWS Node Termination Handler
-- [x] Metrics Server
-- [ ] Argo CD
-- [ ] Cluster Autoscaler, Spot으로 만들기
-- [ ] AWS Load Balancer Controller
-- [ ] Node Problem Detector
-
 ## Provisioning 후, 수행 작업
 
 ### Metrics server 설치 (`manifests` 폴더 아래에서 진행)
